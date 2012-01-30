@@ -1,9 +1,13 @@
 <?php	##################
 	#
 	#	rah_get_date-plugin for Textpattern
-	#	version 0.2
+	#	version 0.3
 	#	by Jukka Svahn
 	#	http://rahforum.biz
+	#
+	#	Copyright (C) 2011 Jukka Svahn <http://rahforum.biz>
+	#	Licensed under GNU Genral Public License version 2
+	#	http://www.gnu.org/licenses/gpl-2.0.html
 	#
 	###################
 
@@ -21,7 +25,7 @@
 			'date' => ''
 		),$atts));
 		
-		$date = trim($date ? $date : (gps('month') ? gps('month') : gps('date')));
+		$date = htmlspecialchars(trim($date ? $date : (gps('month') ? gps('month') : gps('date'))));
 		
 		if(!$date || ($valid = strtotime($date)) == -1 || $valid === false)
 			return;
