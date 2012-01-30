@@ -1,0 +1,55 @@
+h1. rah_get_date
+
+p. The plugin, rah_get_date, outputs date and time from the requested url. Supports "Textpattern's":http://www.textpattern.com inbuild @date@ and @month@ -GET variables, and outputs formated date based on those two GET values. That way you can, for example, output month header to month seperated article listing pages.
+
+* Version: 0.1
+* Updated: 2009/03/06 2:00 PM GMT+2
+
+h3. Table of Contents
+
+* "List of features":#list-of-features
+* "Requirements":#requirements
+* "Installation and usage":#installation-and-usage
+* "Attributes":#attributes
+* "Example":#example
+* "Changelog":#changelog
+
+h3(#list-of-features). List of features
+
+* Ouput date from @?date=@ and/or @?month=@ get values.
+* Format date just like you can with @<txp:posted />@.
+
+h3(#requirements). Requirements
+
+p. Minimum requirements:
+
+* TXP 4.x.x+
+
+p. Recommended:
+
+* PHP 5.1.0+
+* TXP 4.0.8+
+
+h3(#installation-and-usage). Installation and usage
+
+p. The basic method stands: paste plugin code to the plugin install textarea and run the automatic setup. Activate the plugin, and you are ready to use the new tag, @<txp:rah_get_date />@ like others.
+
+h3(#attributes). Attributes
+
+The tag is @<txp:rah_get_date />@ and attributes for it follow.
+
+p. *format*
+Date format used to output the date. Any valid "strftime()":http://php.net/strftime string value since "iso8601,":http://en.wikipedia.org/wiki/ISO_8601 w3cdtf, or "rfc822.":http://www.w3.org/Protocols/rfc822/#z28
+Default: @format="%Y %B"@ Example: @"%Y %m %d"@.
+
+h3(#example). Example
+
+p. @<txp:rah_get_date format="%Y %B" />@
+
+p. Outputs @"2009 March"@ if requested URI is @http://mysite.com/path/?month=2009-3@.
+
+h3(#changelog). Changelog
+
+p. *Version 0.1*
+
+* First release.
