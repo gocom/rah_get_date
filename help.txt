@@ -1,9 +1,9 @@
 h1. rah_get_date
 
-p. The plugin, rah_get_date, outputs date and time from the requested url. Supports "Textpattern's":http://www.textpattern.com inbuild @date@ and @month@ -GET variables, and outputs formated date based on those two GET values. That way you can, for example, output month header to month seperated article listing pages.
+p. The plugin, rah_get_date, outputs date and time from the requested url. Supports "Textpattern's":http://www.textpattern.com build in @date@ and @month@ -GET variables, and outputs formatted date based on those two GET values. That way you can, for example, output month header to month separated article listing pages.
 
-* Version: 0.1
-* Updated: 2009/03/06 2:00 PM GMT+2
+* Version: 0.2
+* Updated: 2011/05/22 6:55 PM UTC
 
 h3. Table of Contents
 
@@ -11,12 +11,12 @@ h3. Table of Contents
 * "Requirements":#requirements
 * "Installation and usage":#installation-and-usage
 * "Attributes":#attributes
-* "Example":#example
+* "Examples":#examples
 * "Changelog":#changelog
 
 h3(#list-of-features). List of features
 
-* Ouput date from @?date=@ and/or @?month=@ get values.
+* Output date from @?date=@ and/or @?month=@ get values.
 * Format date just like you can with @<txp:posted />@.
 
 h3(#requirements). Requirements
@@ -27,8 +27,7 @@ p. Minimum requirements:
 
 p. Recommended:
 
-* PHP 5.1.0+
-* TXP 4.0.8+
+* TXP 4.4.0+
 
 h3(#installation-and-usage). Installation and usage
 
@@ -36,19 +35,73 @@ p. The basic method stands: paste plugin code to the plugin install textarea and
 
 h3(#attributes). Attributes
 
-The tag is @<txp:rah_get_date />@ and attributes for it follow.
+The tag is @<txp:rah_get_date />@ and attributes for it follow. All attributes are optional.
 
 p. *format*
 Date format used to output the date. Any valid "strftime()":http://php.net/strftime string value since "iso8601,":http://en.wikipedia.org/wiki/ISO_8601 w3cdtf, or "rfc822.":http://www.w3.org/Protocols/rfc822/#z28
 Default: @format="%Y %B"@ Example: @"%Y %m %d"@.
 
-h3(#example). Example
+p. *format_year*
+Allows specific formatting for dates that only specify the year (@YYYY@). If the attribute is set, the additional formatting is used. Same formatting rules apply.
+Default: @unset@ Example: @format_year="Articles posted during %Y"@
 
-p. @<txp:rah_get_date format="%Y %B" />@
+p. *format_month*
+Allows specific formatting for dates that only specify the year and the month of the year (@YYYY-mm@). If the attribute is set, the additional formatting is used. Same formatting rules apply.
+Default: @unset@ Example: @format_month="%B, %Y"@
+
+p. *format_date*
+Allows specific formatting for dates that only specify the year, the month and the day of the month (@YYYY-mm-dd@). If the attribute is set, the additional formatting is used. Same formatting rules apply.
+Default: @unset@ Example: @format_date="%B %d, %Y"@
+
+p. *format_hour*
+Allows specific formatting for dates that only specify the year, month, day and hour of the day (@YYYY-mm-dd HH@). If the attribute is set, the additional formatting is used. Same formatting rules apply.
+Default: @unset@ Example: @format_hour="Posted on %H of %d"@
+
+p. *format_minute*
+Allows specific formatting for dates that only specify the year, month, day, hours and minutes (@YYYY-mm-dd HH:MM@). If the attribute is set, the additional formatting is used. Same formatting rules apply.
+Default: @unset@ Example: @format_minute="%H:%M"@
+
+p. *format_second*
+Allows specific formatting for dates that only specify the year, month, day, hours, minutes and seconds (@YYYY-mm-dd HH:MM:SS@). If the attribute is set, the additional formatting is used. Same formatting rules apply.
+Default: @unset@ Example: @format_second="%Y %B, %d %H:%M:%S"@
+
+p. *format_now*
+Formatting used if the requested date is the current time. Current time's condition is set with the @now_condition@ attribute. By default, if the requested date/time is within the current day, the formatting defined in @format_now@ is used.
+Default: @unset@ Example: @format_now="Articles posted today"@
+
+p. *now_condition*
+Defines what dates are considered as current time. Set the date format that is used in matching current and requested dates. By default matches days (today).
+Default: @now_condition="%Y-%m-%d"@ Example: @"%Y-%m"@
+
+h3(#examples). Examples
+
+p. *Example #1: Basic usage*
+
+bc. <txp:rah_get_date format="%Y %B" />
 
 p. Outputs @"2009 March"@ if requested URI is @http://mysite.com/path/?month=2009-3@.
 
+p. *Example #2: Use specific formatting for dates that only define the year*
+
+The example uses @format_year@ attribute to set the formatting for the dates that only specify the year.
+
+bc. <txp:rah_get_date format="%Y %B" format_year="Posted during %Y" />
+
+p. Outputs @"2009 March"@ if the requested URL is @http://mysite.com/path/?month=2009-3@ and @"Posted during 2008"@ if the requested URL is @http://mysite.com/path/?month=2008@
+
+p. *Example #3: Output @"Posted today"@, if the requested timestamp is today.
+
+bc. <txp:rah_get_date now_condition="%Y-%m-%d" format_now="Posted today" />
+
 h3(#changelog). Changelog
+
+p. *Version 0.2*
+
+* Added: support for additional formatting rules applied based on timestamp's accuracy. Added attributes: @format_year@, @format_month@, @format_date@, @format_hour@, @format_minute@, @format_second@, @format_now@, @now_condition@ and @date@.
+* Added: Ability to set the date using @date@ attribute in addition to the URL parameter.
+* Now uses safe_strtotime() instead of strtotime() to format the dates.
+* Now checks if the provided date is in valid strtotime() format.
+* Skip date formatting if the resulting formatting string is empty.
 
 p. *Version 0.1*
 
