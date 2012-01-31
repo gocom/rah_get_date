@@ -6,7 +6,7 @@
  * @author Jukka Svahn
  * @date 2009-
  * @license GNU GPLv2
- * @link http://rahforum.biz/plugins/rah_file_search
+ * @link http://rahforum.biz/plugins/rah_get_date
  *
  * Copyright (C) 2012 Jukka Svahn <http://rahforum.biz>
  * Licensed under GNU Genral Public License version 2
